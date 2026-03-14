@@ -1,36 +1,36 @@
 {
   "EA2": {
-    "image": "/cip-gauges-qr-code/gauges/EA2.png",
+    "image": "/assets/gauges/EA2.png",
     "description": "Gauge list for EA2 part - Steel measurement set",
     "note": "Return all gauges to cabinet immediately after inspection"
   },
   "EB2": {
-    "image": "/cip-gauges-qr-code/gauges/EB2.png",
+    "image": "/assets/gauges/EB2.png",
     "description": "Gauge list for EB2 part - Steel measurement set",
     "note": "Return all gauges to cabinet immediately after inspection"
   },
   "FA2": {
-    "image": "/cip-gauges-qr-code/gauges/FA2.png",
+    "image": "/assets/gauges/FA2.png",
     "description": "Gauge list for FA2 part - Steel measurement set",
     "note": "Return all gauges to cabinet immediately after inspection"
   },
   "FB2": {
-    "image": "/cip-gauges-qr-code/gauges/FB2.png",
+    "image": "/assets/gauges/FB2.png",
     "description": "Gauge list for FB2 part - Steel measurement set",
     "note": "Return all gauges to cabinet immediately after inspection"
   },
   "GA3": {
-    "image": "/cip-gauges-qr-code/gauges/GA3.png",
+    "image": "/assets/gauges/FA1.png",
     "description": "Gauge list for GA3 part - Precision measurement set",
     "note": "Handle with care - precision instruments. Return to cabinet after use"
   },
   "GB3": {
-    "image": "/cip-gauges-qr-code/gauges/GB3.png",
+    "image": "/assets/gauges/EA1.png",
     "description": "Gauge list for GB3 part - Precision measurement set",
     "note": "Handle with care - precision instruments. Return to cabinet after use"
   },
   "HC1": {
-    "image": "/cip-gauges-qr-code/gauges/HC1.png",
+    "image": "/assets/gauges/CA1.png",
     "description": "Gauge list for HC1 part - Heavy duty measurement",
     "note": "Calibration check required every shift. Check with supervisor"
   }
