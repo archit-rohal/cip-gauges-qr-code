@@ -10,7 +10,7 @@ import react from '@vitejs/plugin-react'
  */
 export default defineConfig({
   plugins: [react()],
-  base: '/cip-gauges-qr-code/',
+  //base: '/cip-gauges-qr-code/',
   build: {
     outDir: 'dist',
     sourcemap: false,
