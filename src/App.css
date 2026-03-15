@@ -223,6 +223,219 @@ a[role='button'] {
   background-color: #EBEBF0;
 }
 
+/* ====== PAGE LAYOUT SYSTEM ====== */
+/* Consistent full-height page container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-container--white {
+  background-color: var(--bg-secondary);
+}
+
+/* Page header with title area */
+.page-header {
+  flex-shrink: 0;
+  padding: 2.5rem 2rem;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 640px) {
+  .page-header {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.page-header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.page-header-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Main content area with proper rhythm */
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-content--centered {
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .page-content {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Content region with max-width constraint */
+.content-max-width {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Section wrapper with consistent spacing */
+.page-section {
+  margin-bottom: 3rem;
+}
+
+.page-section:last-child {
+  margin-bottom: 0;
+}
+
+/* ====== METADATA SECTIONS ====== */
+/* Footer/metadata section at bottom of pages */
+.page-metadata {
+  flex-shrink: 0;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 640px) {
+  .page-metadata {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.metadata-item {
+  margin-bottom: 1.5rem;
+}
+
+.metadata-item:last-child {
+  margin-bottom: 0;
+}
+
+.metadata-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.metadata-content {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ====== CARD SYSTEM ====== */
+/* Elevated surface with shadows */
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #E5E5ED;
+}
+
+.card-large {
+  padding: 2rem;
+}
+
+/* ====== NOTE / ALERT SECTIONS ====== */
+.note-section {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+  background-color: #FEF3C7;
+  border-color: #F59E0B;
+}
+
+.note-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #78350F;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.note-section-content {
+  font-size: 1rem;
+  color: #92400E;
+  line-height: 1.6;
+}
+
+/* ====== TYPOGRAPHY ALIGNMENT ====== */
+/* Utility classes for consistent text application */
+.text-display {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.text-heading-xl {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-heading-lg {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-heading-md {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.text-body-lg {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
 /* ====== INPUTS ====== */
 input,
 textarea {

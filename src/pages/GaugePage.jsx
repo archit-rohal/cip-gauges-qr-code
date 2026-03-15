@@ -21,34 +21,53 @@ export function GaugePage() {
   };
 
   return (
-    <div className="gauge-page">
-      {/* Back Button */}
+    <div className={`gauge-page-container ${isFullScreen ? 'gauge-page-container--fullscreen' : ''}`}>
+      {/* Main gauge display area */}
+      <div className="gauge-page-content">
+        <GaugeDisplay
+          partCode={partCode}
+          onNotFound={handleNotFound}
+        />
+      </div>
+
+      {/* Control Bar - Always visible, positioned at bottom */}
       {!isFullScreen && (
-        <button
-          onClick={() => navigate('/')}
-          className="back-button"
-          aria-label="Go back to part selection"
-          title="Go back to part selection"
-        >
-          ← Back
-        </button>
+        <div className="gauge-page-controls">
+          <button
+            onClick={() => navigate('/')}
+            className="gauge-control-btn gauge-control-btn--back"
+            aria-label="Go back to part selection"
+            title="Go back to home"
+          >
+            <span className="btn-icon-symbol">←</span>
+            <span className="btn-label">Back</span>
+          </button>
+
+          <div className="gauge-control-spacer"></div>
+
+          <button
+            onClick={toggleFullScreen}
+            className="gauge-control-btn gauge-control-btn--fullscreen"
+            aria-label="Enter full-screen mode"
+            title="Full-screen viewing"
+          >
+            <span className="btn-icon-symbol">⛶</span>
+            <span className="btn-label">Full</span>
+          </button>
+        </div>
       )}
 
-      {/* Full-Screen Toggle Button */}
-      <button
-        onClick={toggleFullScreen}
-        className={`fullscreen-button ${isFullScreen ? 'fullscreen-button--active' : ''}`}
-        aria-label={isFullScreen ? 'Exit full-screen' : 'Enter full-screen'}
-        title={isFullScreen ? 'Exit full-screen (ESC)' : 'Full-screen mode'}
-      >
-        {isFullScreen ? '⛶' : '⛶'}
-      </button>
-
-      {/* Gauge Display Component */}
-      <GaugeDisplay
-        partCode={partCode}
-        onNotFound={handleNotFound}
-      />
+      {/* Floating exit button in fullscreen mode */}
+      {isFullScreen && (
+        <button
+          onClick={toggleFullScreen}
+          className="gauge-control-btn gauge-control-btn--fullscreen-exit"
+          aria-label="Exit full-screen mode"
+          title="Exit full-screen (ESC)"
+        >
+          ✕
+        </button>
+      )}
     </div>
   );
 }

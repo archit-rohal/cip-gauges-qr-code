@@ -10,8 +10,8 @@ import './GaugeDisplay.css';
  * GaugeDisplay Component
  * 
  * Displays gauge information and image with zoom capability
- * Tracks recent parts for quick access
  * Supports full-screen viewing mode
+ * Part of the unified design system across the app
  * 
  * Props:
  *   - partCode: The part code (e.g., 'EA2')
@@ -37,61 +37,53 @@ export function GaugeDisplay({ partCode, onNotFound }) {
   const gauge = gaugesData[partCode];
 
   return (
-    <div className={`gauge-page ${isFullScreen ? 'fullscreen-mode' : ''}`}>
-      {/* Header with Part Number - Full width banner */}
+    <div className={`gauge-display-wrapper ${isFullScreen ? 'gauge-display-wrapper--fullscreen' : ''}`}>
+      {/* Header with Part Code - Hidden in fullscreen */}
       {!isFullScreen && (
         <div className="gauge-page-header">
-          <h1>
+          <h1 className="gauge-part-title">
             PART: <span className="accent">{partCode}</span>
           </h1>
         </div>
       )}
 
-      {/* Main Content Area - Flex grow to fill space */}
-      <div className="flex-1 flex flex-col justify-center items-center px-4 md:px-6 py-6 md:py-8 overflow-auto">
-        {/* Gauge Image with Zoom */}
+      {/* Main Image Viewing Area - Flexible, centered content */}
+      <div className="gauge-display-content">
         {imageError ? (
-          <div className="flex flex-col items-center justify-center w-full max-w-3xl py-12">
-            <div className="text-5xl md:text-6xl mb-4">⚠</div>
-            <p className="text-2xl md:text-3xl text-gray-900 font-semibold mb-3">
-              Image Not Available
-            </p>
-            <p className="text-lg md:text-xl text-gray-600 text-center">
+          <div className="gauge-display-error">
+            <div className="gauge-display-error-icon">⚠</div>
+            <h2 className="gauge-display-error-title">Image Not Available</h2>
+            <p className="gauge-display-error-msg">
               The gauge list image could not be loaded. Please try another part code.
             </p>
           </div>
         ) : (
-          <div className="w-full max-w-4xl">
+          <div className="gauge-image-container">
             <ZoomableImage
               src={gauge.image}
               alt={`Gauge list for part ${partCode}`}
               maxZoom={4}
+              onError={() => setImageError(true)}
             />
           </div>
         )}
       </div>
 
-      {/* Description & Notes - Below image */}
+      {/* Metadata Section - Description and Important Notes */}
       {!isFullScreen && (
-        <div className="px-4 md:px-6 pb-6 md:pb-8">
-          {/* Description - If provided */}
+        <div className="gauge-metadata-section">
+          {/* Description */}
           {gauge.description && (
-            <div className="mb-6 md:mb-8 max-w-3xl mx-auto">
-              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-                {gauge.description}
-              </p>
+            <div className="metadata-item">
+              <p className="gauge-description">{gauge.description}</p>
             </div>
           )}
 
-          {/* Note/Instructions - Highlighted in yellow */}
+          {/* Important Note/Instructions */}
           {gauge.note && (
-            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 md:p-6 rounded-lg max-w-3xl mx-auto">
-              <p className="text-sm md:text-base font-bold text-amber-900 mb-2 flex items-center gap-2">
-                ⚡ Important
-              </p>
-              <p className="text-base md:text-lg text-amber-800 leading-relaxed">
-                {gauge.note}
-              </p>
+            <div className="gauge-note-box">
+              <p className="gauge-note-label">⚡ Important</p>
+              <p className="gauge-note-content">{gauge.note}</p>
             </div>
           )}
         </div>
