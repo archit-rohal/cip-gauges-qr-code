@@ -87,7 +87,7 @@ Generate all parts in batch:
 
 #!/bin/bash
 
-PARTS=("EA2" "EB2" "FA2" "FB2" "GA3" "GB3" "HC1")
+PARTS=("EA2" "EB2" "FA2" "FB2" "CA1" "EA1" "FA1")
 BASE_URL="https://username.github.io/cip-gauges-qr-code"
 
 for PART in "${PARTS[@]}"; do

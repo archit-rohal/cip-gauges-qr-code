@@ -72,9 +72,9 @@ EA2:  https://yourdomain.netlify.app/#/part/EA2
 EB2:  https://yourdomain.netlify.app/#/part/EB2
 FA2:  https://yourdomain.netlify.app/#/part/FA2
 FB2:  https://yourdomain.netlify.app/#/part/FB2
-GA3:  https://yourdomain.netlify.app/#/part/GA3
-GB3:  https://yourdomain.netlify.app/#/part/GB3
-HC1:  https://yourdomain.netlify.app/#/part/HC1
+CA1:  https://yourdomain.netlify.app/#/part/CA1
+EA1:  https://yourdomain.netlify.app/#/part/EA1
+FA1:  https://yourdomain.netlify.app/#/part/FA1
 ```
 
 (Add more as you add parts to `gauges.json`)
@@ -237,7 +237,7 @@ https://[YOUR-NETLIFY-DOMAIN].netlify.app/#/part/[PART_CODE]
 ```
 https://gauges-mfg.netlify.app/#/part/EA2
 https://gauges-mfg.netlify.app/#/part/EB2
-https://industrial-gauges.netlify.app/#/part/GA3
+https://industrial-gauges.netlify.app/#/part/CA1
 ```
 
 ---
