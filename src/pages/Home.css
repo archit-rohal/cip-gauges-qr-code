@@ -8,6 +8,15 @@
   text-align: center;
 }
 
+.home-recent-parts {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+  @apply p-6 rounded-lg border border-blue-200 mb-8;
+}
+
+.home-recent-parts h2 {
+  @apply text-xl md:text-2xl font-semibold text-gray-900;
+}
+
 .home-input-section {
   margin-left: auto;
   margin-right: auto;
@@ -51,6 +60,10 @@
   }
 
   .home-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-recent-parts {
     margin-bottom: 1.5rem;
   }
 

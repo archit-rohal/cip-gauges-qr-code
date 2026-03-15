@@ -17,10 +17,32 @@
   transform: scale(0.98);
 }
 
+.fullscreen-button {
+  @apply fixed top-4 right-4 md:top-6 md:right-6 px-3 py-2 text-xl font-semibold text-blue-600 bg-white rounded-lg border-2 border-blue-200 hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 z-50 shadow-sm;
+  -webkit-appearance: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  min-width: 2.5rem;
+}
+
+.fullscreen-button:active {
+  transform: scale(0.98);
+}
+
+.fullscreen-button--active {
+  @apply bg-blue-100 border-blue-300;
+}
+
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .back-button {
     @apply fixed top-3 left-3 px-3 py-1.5 text-base;
+    z-index: 50;
+  }
+
+  .fullscreen-button {
+    @apply fixed top-3 right-3 px-2 py-1.5 text-lg;
     z-index: 50;
   }
 
@@ -34,4 +56,15 @@
   .back-button {
     @apply hover:shadow-md;
   }
+
+  .fullscreen-button {
+    @apply hover:shadow-md;
+  }
 }
+
+/* Full-screen mode: hide navigation UI */
+.gauge-page.fullscreen-mode .back-button,
+.gauge-page.fullscreen-mode .zoom-hint {
+  @apply hidden;
+}
+

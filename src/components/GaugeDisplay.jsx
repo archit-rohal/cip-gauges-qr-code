@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import gaugesData from '../data/gauges.json';
+import { useFullScreen } from '../context/FullScreenContext';
+import { useRecentParts } from '../hooks/useRecentParts';
 import NotFound from './NotFound';
 import Loading from './Loading';
 import { ZoomableImage } from './ZoomableImage';
@@ -8,6 +10,8 @@ import { ZoomableImage } from './ZoomableImage';
  * GaugeDisplay Component
  * 
  * Displays gauge information and image with zoom capability
+ * Tracks recent parts for quick access
+ * Supports full-screen viewing mode
  * 
  * Props:
  *   - partCode: The part code (e.g., 'EA2')
@@ -16,10 +20,19 @@ import { ZoomableImage } from './ZoomableImage';
 export function GaugeDisplay({ partCode, onNotFound }) {
   const [loading, setLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const { isFullScreen } = useFullScreen();
+  const { addRecentPart } = useRecentParts();
 
   useEffect(() => {
     setLoading(false);
   }, [partCode]);
+
+  // Track this part as recently viewed
+  useEffect(() => {
+    if (partCode && gaugesData[partCode]) {
+      addRecentPart(partCode);
+    }
+  }, [partCode, addRecentPart]);
 
   if (loading) return <Loading />;
 
@@ -32,13 +45,15 @@ export function GaugeDisplay({ partCode, onNotFound }) {
   const gauge = gaugesData[partCode];
 
   return (
-    <div className="flex flex-col h-screen w-full bg-white p-4 md:p-6">
+    <div className={`flex flex-col h-screen w-full bg-white p-4 md:p-6 ${isFullScreen ? 'fullscreen-mode' : ''}`}>
       {/* Header: Part Number - Large and prominent */}
-      <div className="mb-6 md:mb-8">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
-          PART: <span className="text-blue-600">{partCode}</span>
-        </h1>
-      </div>
+      {!isFullScreen && (
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
+            PART: <span className="text-blue-600">{partCode}</span>
+          </h1>
+        </div>
+      )}
 
       {/* Main Content Area with Zoomable Image */}
       <div className="flex-1 flex flex-col justify-center items-center mb-6 md:mb-8">
@@ -63,7 +78,7 @@ export function GaugeDisplay({ partCode, onNotFound }) {
       </div>
 
       {/* Description - If provided */}
-      {gauge.description && (
+      {!isFullScreen && gauge.description && (
         <div className="mb-4 md:mb-6">
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
             {gauge.description}
@@ -72,7 +87,7 @@ export function GaugeDisplay({ partCode, onNotFound }) {
       )}
 
       {/* Note/Instructions - Highlighted in yellow */}
-      {gauge.note && (
+      {!isFullScreen && gauge.note && (
         <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 md:p-6 rounded">
           <p className="text-sm md:text-base font-bold text-yellow-900 mb-2">
             ⚡ Important:
@@ -84,9 +99,11 @@ export function GaugeDisplay({ partCode, onNotFound }) {
       )}
 
       {/* Footer Info - Minimal */}
-      <div className="text-center text-xs text-gray-500 mt-6 pt-4 border-t border-gray-200">
-        <p>Scan or enter another part code to view a different gauge list</p>
-      </div>
+      {!isFullScreen && (
+        <div className="text-center text-xs text-gray-500 mt-6 pt-4 border-t border-gray-200">
+          <p>Scan or enter another part code to view a different gauge list</p>
+        </div>
+      )}
     </div>
   );
 }

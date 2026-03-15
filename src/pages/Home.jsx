@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gaugesData from '../data/gauges.json';
+import { useRecentParts } from '../hooks/useRecentParts';
 import './Home.css';
 
 /**
@@ -10,6 +11,7 @@ import './Home.css';
  * 1. Scan a QR code (which embeds the part code)
  * 2. Manually enter a part code
  * 3. Browse available parts
+ * 4. Quick-access recently viewed parts
  * 
  * Mobile-first design optimized for factory use
  */
@@ -18,6 +20,7 @@ export function Home() {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
   const fileInputRef = useRef(null);
+  const { recentParts, clearRecentParts } = useRecentParts();
 
   const availableParts = Object.keys(gaugesData);
 
@@ -62,6 +65,37 @@ export function Home() {
           Find the right inspection gauges for each part
         </p>
       </div>
+
+      {/* Recent Parts Section */}
+      {recentParts.length > 0 && (
+        <div className="home-recent-parts mb-8 md:mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
+              ⏱ Recently Viewed
+            </h2>
+            <button
+              onClick={clearRecentParts}
+              className="text-xs text-gray-500 hover:text-gray-700 underline"
+              title="Clear recent history"
+            >
+              Clear
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+            {recentParts.map((partCode) => (
+              <button
+                key={partCode}
+                onClick={() => handleQuickLink(partCode)}
+                className="px-4 py-3 text-center font-bold text-white bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-600 rounded-lg hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 transition-colors duration-200 text-lg shadow-md"
+                aria-label={`View gauge list for part ${partCode}`}
+              >
+                {partCode}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Main Input Section */}
       <div className="home-input-section mb-8 md:mb-12 max-w-md mx-auto">
@@ -136,6 +170,8 @@ export function Home() {
           <li>Type the part code (e.g., EA2) in the box above</li>
           <li>View the gauge list for that part</li>
           <li>Pinch or scroll to zoom in for better visibility</li>
+          <li>Double-click to toggle zoom in/out</li>
+          <li>Click full-screen icon for maximum image space</li>
           <li>Return all gauges to the cabinet after inspection</li>
         </ol>
       </div>
