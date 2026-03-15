@@ -1,82 +1,63 @@
-import { useImageZoom } from '../hooks/useImageZoom';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import './ZoomableImage.css';
 
 /**
  * ZoomableImage Component
  * 
- * Renders an image with pinch-to-zoom and scroll-to-zoom capabilities
- * Includes manual zoom buttons for accessibility
+ * Simple, smooth image zoom with:
+ * - Pinch-to-zoom on mobile
+ * - Mouse wheel zoom on desktop
+ * - Drag to pan when zoomed in
+ * - Double-click to zoom in/out
+ * 
+ * Uses react-zoom-pan-pinch library for smooth, reliable interactions
  * 
  * Props:
  *   - src: Image source URL
  *   - alt: Alt text for accessibility
- *   - maxZoom: Maximum zoom level (default: 4)
  */
-export function ZoomableImage({ src, alt, maxZoom = 4 }) {
-  const {
-    zoom,
-    pan,
-    containerRef,
-    handlers,
-    controls,
-    state,
-  } = useImageZoom(1, 1, maxZoom);
-
+export function ZoomableImage({ src, alt }) {
   return (
-    <div className="zoomable-image-container" ref={containerRef}>
-      {/* Zoom Controls */}
-      <div className="zoom-controls">
-        <button
-          className="zoom-btn zoom-btn--minus"
-          onClick={controls.zoomOut}
-          disabled={!state.canZoomOut}
-          aria-label="Zoom out"
-          title="Scroll wheel or pinch to zoom"
-        >
-          −
-        </button>
-
-        <span className="zoom-level">
-          {Math.round(zoom * 100)}%
-        </span>
-
-        <button
-          className="zoom-btn zoom-btn--plus"
-          onClick={controls.zoomIn}
-          disabled={!state.canZoomIn}
-          aria-label="Zoom in"
-          title="Scroll wheel or pinch to zoom"
-        >
-          +
-        </button>
-
-        {zoom !== 1 && (
-          <button
-            className="zoom-btn zoom-btn--reset"
-            onClick={controls.resetZoom}
-            aria-label="Reset zoom"
-            title="Reset to original size"
-          >
-            ↺
-          </button>
-        )}
+    <div className="zoomable-image-container">
+      {/* Zoom hint for first-time users */}
+      <div className="zoom-hint">
+        <p className="text-xs text-gray-500">
+          💡 Pinch to zoom • Drag to pan • Double-click to zoom
+        </p>
       </div>
 
-      {/* Image Viewport */}
-      <div
-        className="zoom-viewport"
-        onWheel={handlers.onWheel}
-        onTouchStart={handlers.onTouchStart}
-        onTouchMove={handlers.onTouchMove}
-        onTouchEnd={handlers.onTouchEnd}
+      {/* Zoom wrapper with smooth animations */}
+      <TransformWrapper
+        initialScale={1}
+        minScale={1}
+        maxScale={4}
+        wheel={{
+          step: 0.1,
+          smoothStep: 0.02,
+          wheelDisabled: false,
+        }}
+        pinch={{
+          disabled: false,
+        }}
+        doubleClick={{
+          disabled: false,
+          step: 1.5,
+          animation: { animationTime: 200 },
+        }}
+        panning={{
+          disabled: false,
+          velocityDisabled: false,
+        }}
+        alignmentAnimation={{
+          sizeWidth: 100,
+          sizeHeight: 100,
+          animationTime: 200,
+          animationType: 'easeOut',
+        }}
       >
-        <div
-          className="zoom-content"
-          style={{
-            transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
-            transformOrigin: 'center',
-            cursor: zoom > 1 ? (state.isDragging ? 'grabbing' : 'grab') : 'default',
-          }}
+        <TransformComponent
+          wrapperClass="zoom-wrapper"
+          contentClass="zoom-content"
         >
           <img
             src={src}
@@ -85,17 +66,8 @@ export function ZoomableImage({ src, alt, maxZoom = 4 }) {
             draggable={false}
             loading="lazy"
           />
-        </div>
-      </div>
-
-      {/* Zoom instructions for first-time users */}
-      {zoom === 1 && (
-        <div className="zoom-hint">
-          <p className="text-xs text-gray-500">
-            💡 Pinch or scroll to zoom in
-          </p>
-        </div>
-      )}
+        </TransformComponent>
+      </TransformWrapper>
     </div>
   );
 }
