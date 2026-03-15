@@ -1,19 +1,29 @@
-import { GaugeDisplay } from './components/GaugeDisplay'
-import './App.css'
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { GaugePage } from './pages/GaugePage';
+import './App.css';
 
 /**
  * App Component
  * 
- * Main application wrapper for the Gauge Identification System
- * Renders the gauge display component in a full-screen layout
- * optimized for factory mobile environment
+ * Main application router using React Router v6
+ * Hash-based routing for Netlify compatibility (no server config needed)
+ * 
+ * Routes:
+ *   / → Home page with part selection
+ *   /part/:partCode → Gauge detail page
+ *   * → Redirects to home
  */
 function App() {
   return (
-    <div className="min-h-screen w-full bg-white">
-      <GaugeDisplay />
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/part/:partCode" element={<GaugePage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

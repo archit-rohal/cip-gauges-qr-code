@@ -1,0 +1,84 @@
+/* Home Page Styles */
+
+.home-container {
+  @apply max-w-6xl mx-auto;
+}
+
+.home-header {
+  text-align: center;
+}
+
+.home-input-section {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-input-section input:focus {
+  border-color: rgb(37, 99, 235);
+  box-shadow: 0 0 0 3px rgba(96, 125, 239, 0.1);
+}
+
+.home-quick-links {
+  margin-bottom: 2rem;
+}
+
+.home-instructions {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.1) 100%);
+}
+
+.home-instructions ol {
+  counter-reset: item;
+  list-style: none;
+  padding: 0;
+}
+
+.home-instructions li {
+  counter-increment: item;
+  margin-bottom: 0.75rem;
+}
+
+.home-instructions li:before {
+  content: counter(item) ". ";
+  font-weight: 600;
+  color: rgb(37, 99, 235);
+  margin-right: 0.5rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .home-container {
+    padding: 0;
+  }
+
+  .home-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-input-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-quick-links {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .home-instructions {
+    margin: 2rem 1rem 1rem 1rem;
+  }
+}
+
+/* Touch-friendly adjustments */
+button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0.5rem;
+}
+
+input:autofill {
+  -webkit-autofill-delay: 0s;
+}

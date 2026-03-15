@@ -1,0 +1,107 @@
+/* ZoomableImage Component Styles */
+
+.zoomable-image-container {
+  @apply relative w-full h-full flex flex-col justify-center items-center gap-4 bg-white;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.zoom-viewport {
+  @apply w-full flex-1 flex justify-center items-center overflow-hidden bg-gray-50 rounded-lg;
+  position: relative;
+  min-height: 20rem;
+  touch-action: pinch-zoom none;
+}
+
+.zoom-content {
+  @apply flex justify-center items-center;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.zoom-image {
+  @apply max-w-full max-h-full object-contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  @apply flex items-center gap-3 px-4 py-3 bg-white rounded-lg shadow-sm border border-gray-200;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.zoom-btn {
+  @apply px-3 py-2 text-base font-semibold rounded-md transition-colors duration-200;
+  @apply bg-blue-50 text-blue-700 border border-blue-200;
+  @apply hover:bg-blue-100 active:bg-blue-200;
+  @apply disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-50;
+  min-width: 2.5rem;
+  touch-action: manipulation;
+}
+
+.zoom-btn--reset {
+  @apply px-2;
+  width: auto;
+}
+
+.zoom-level {
+  @apply text-sm font-medium text-gray-700 px-2 py-1 bg-gray-100 rounded;
+  min-width: 3.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zoom hint for mobile users */
+.zoom-hint {
+  @apply text-center px-4 py-2 text-gray-500 text-xs;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .zoom-controls {
+    @apply gap-2 px-3 py-2;
+  }
+
+  .zoom-btn {
+    @apply px-2 py-1.5 text-sm;
+    min-width: 2rem;
+  }
+
+  .zoom-level {
+    @apply text-xs px-1.5 py-1;
+    min-width: 3rem;
+  }
+
+  .zoom-viewport {
+    min-height: 15rem;
+  }
+}
+
+/* Tablet/Desktop */
+@media (min-width: 768px) {
+  .zoom-controls {
+    @apply gap-4;
+  }
+
+  .zoom-btn {
+    @apply px-4 py-2;
+    min-width: 3rem;
+  }
+
+  .zoom-level {
+    @apply text-sm;
+    min-width: 4rem;
+  }
+}
+
+/* Prevent text selection during zoom interaction */
+.zoomable-image-container img {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

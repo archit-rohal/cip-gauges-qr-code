@@ -3,14 +3,11 @@ import react from '@vitejs/plugin-react'
 
 /**
  * Vite configuration for Gauge Identification System
- * Configured for GitHub Pages deployment
- * 
- * Base path: /cip-gauges-qr-code/
- * Update this if repo name changes
+ * Configured for Netlify deployment (no base path needed)
+ * Hash-based routing works out of the box
  */
 export default defineConfig({
   plugins: [react()],
-  //base: '/cip-gauges-qr-code/',
   build: {
     outDir: 'dist',
     sourcemap: false,

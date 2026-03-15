@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 /**
  * NotFound Component
  * Displays when part number is not found in the database
  * Industrial UX: Large text, high contrast, error state
  */
 export default function NotFound({ partCode }) {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col h-screen w-full bg-red-50 p-4 justify-center items-center">
       <div className="w-full max-w-2xl text-center">
@@ -34,12 +38,12 @@ export default function NotFound({ partCode }) {
         </p>
 
         {/* Action Button */}
-        <a
-          href={window.location.origin + window.location.pathname}
-          className="inline-block px-8 py-4 bg-blue-600 text-white text-2xl font-bold rounded-lg hover:bg-blue-700 transition-colors"
+        <button
+          onClick={() => navigate('/')}
+          className="px-8 py-4 text-xl font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200"
         >
-          Scan Again
-        </a>
+          Back to Part Selection
+        </button>
 
         {/* Support Info */}
         <div className="mt-12 p-6 bg-gray-100 rounded-lg">

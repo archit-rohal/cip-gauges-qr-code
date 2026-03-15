@@ -2,52 +2,47 @@ import { useEffect, useState } from 'react';
 import gaugesData from '../data/gauges.json';
 import NotFound from './NotFound';
 import Loading from './Loading';
+import { ZoomableImage } from './ZoomableImage';
 
 /**
  * GaugeDisplay Component
  * 
- * Main component that:
- * 1. Reads the 'part' parameter from URL query string
- * 2. Looks up the part in gauges.json
- * 3. Displays the gauge image and metadata
- * 4. Handles loading and error states
+ * Displays gauge information and image with zoom capability
  * 
- * Usage: mysite.com/?part=EA2
+ * Props:
+ *   - partCode: The part code (e.g., 'EA2')
+ *   - onNotFound: Optional callback when part is not found
  */
-export function GaugeDisplay() {
-  const [part, setPart] = useState(null);
-  const [loading, setLoading] = useState(true);
+export function GaugeDisplay({ partCode, onNotFound }) {
+  const [loading, setLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    // Read URL parameter from query string
-    const params = new URLSearchParams(window.location.search);
-    const partCode = params.get('part');
-    setPart(partCode);
     setLoading(false);
-  }, []);
+  }, [partCode]);
 
   if (loading) return <Loading />;
 
   // Part not found or not provided
-  if (!part || !gaugesData[part]) {
-    return <NotFound partCode={part} />;
+  if (!partCode || !gaugesData[partCode]) {
+    if (onNotFound) onNotFound();
+    return <NotFound partCode={partCode} />;
   }
 
-  const gauge = gaugesData[part];
+  const gauge = gaugesData[partCode];
 
   return (
     <div className="flex flex-col h-screen w-full bg-white p-4 md:p-6">
       {/* Header: Part Number - Large and prominent */}
       <div className="mb-6 md:mb-8">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
-          PART: <span className="text-blue-600">{part}</span>
+          PART: <span className="text-blue-600">{partCode}</span>
         </h1>
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content Area with Zoomable Image */}
       <div className="flex-1 flex flex-col justify-center items-center mb-6 md:mb-8">
-        {/* Gauge Image */}
+        {/* Gauge Image with Zoom */}
         {imageError ? (
           <div className="flex flex-col items-center justify-center w-full h-full bg-gray-100 rounded-lg p-6">
             <div className="text-6xl mb-4">⚠</div>
@@ -59,12 +54,10 @@ export function GaugeDisplay() {
             </p>
           </div>
         ) : (
-          <img
+          <ZoomableImage
             src={gauge.image}
-            alt={`Gauge list for part ${part}`}
-            className="max-w-full max-h-96 md:max-h-full object-contain"
-            loading="lazy"
-            onError={() => setImageError(true)}
+            alt={`Gauge list for part ${partCode}`}
+            maxZoom={4}
           />
         )}
       </div>
@@ -92,7 +85,7 @@ export function GaugeDisplay() {
 
       {/* Footer Info - Minimal */}
       <div className="text-center text-xs text-gray-500 mt-6 pt-4 border-t border-gray-200">
-        <p>Scan another QR code to view a different gauge list</p>
+        <p>Scan or enter another part code to view a different gauge list</p>
       </div>
     </div>
   );

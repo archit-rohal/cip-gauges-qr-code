@@ -1,0 +1,37 @@
+/* GaugePage Styles */
+
+.gauge-page {
+  @apply relative w-full h-full;
+  position: relative;
+}
+
+.back-button {
+  @apply fixed top-4 left-4 md:top-6 md:left-6 px-4 py-2 text-lg font-semibold text-blue-600 bg-white rounded-lg border-2 border-blue-200 hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 z-50 shadow-sm;
+  -webkit-appearance: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.back-button:active {
+  transform: scale(0.98);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .back-button {
+    @apply fixed top-3 left-3 px-3 py-1.5 text-base;
+    z-index: 50;
+  }
+
+  .gauge-page {
+    padding-top: 3rem;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .back-button {
+    @apply hover:shadow-md;
+  }
+}
