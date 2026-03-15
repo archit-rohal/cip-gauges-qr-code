@@ -1,44 +1,23 @@
-/**
- * Netlify Configuration
- * 
- * This file configures the build and deployment settings for Netlify
- */
+# Netlify Configuration
+# Builds and deploys the Gauge Identification System to Netlify
+# Hash-based routing requires no special server configuration
 
 [build]
-  # Build command
   command = "npm run build"
-  # Directory to deploy
   publish = "dist"
 
-[dev]
-  # Local development settings
-  command = "npm run dev"
-  port = 3000
-
-# Cache settings for better performance
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "max-age=3600, must-revalidate"
-
-# Cache static assets longer (images, CSS, JS)
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "max-age=31536000, immutable"
-
-# Cache the HTML shell with validation
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "max-age=0, must-revalidate"
-
-# Service Worker caching strategy
+# Security and performance headers
 [[headers]]
   for = "/index.html"
   [headers.values]
-    Cache-Control = "max-age=0, must-revalidate"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "max-age=0, must-revalidate"
+
+# Cache static assets for 1 year (immutable)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000, immutable"
