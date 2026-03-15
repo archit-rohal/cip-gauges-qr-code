@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import './ZoomableImage.css';
 
@@ -8,7 +9,7 @@ import './ZoomableImage.css';
  * - Pinch-to-zoom on mobile
  * - Mouse wheel zoom on desktop
  * - Drag to pan when zoomed in
- * - Double-click to zoom in/out
+ * - Double-click to toggle zoom in/out (toggle behavior)
  * 
  * Uses react-zoom-pan-pinch library for smooth, reliable interactions
  * 
@@ -17,17 +18,37 @@ import './ZoomableImage.css';
  *   - alt: Alt text for accessibility
  */
 export function ZoomableImage({ src, alt }) {
+  const [isZoomedIn, setIsZoomedIn] = useState(false);
+  const transformRef = useRef(null);
+
+  const handleDoubleClick = () => {
+    const transform = transformRef.current;
+    if (!transform) return;
+
+    if (isZoomedIn) {
+      // Reset to default view (1x zoom, centered)
+      transform.resetTransform();
+      setIsZoomedIn(false);
+    } else {
+      // Zoom to 2.5x (good for inspecting gauge details)
+      // Parameters: positionX, positionY, scale, animationDuration
+      transform.setTransform(0, 0, 2.5, 200);
+      setIsZoomedIn(true);
+    }
+  };
+
   return (
     <div className="zoomable-image-container">
       {/* Zoom hint for first-time users */}
       <div className="zoom-hint">
         <p className="text-xs text-gray-500">
-          💡 Pinch to zoom • Drag to pan • Double-click to zoom
+          💡 Pinch to zoom • Drag to pan • Double-click to zoom in/out
         </p>
       </div>
 
       {/* Zoom wrapper with smooth animations */}
       <TransformWrapper
+        ref={transformRef}
         initialScale={1}
         minScale={1}
         maxScale={4}
@@ -40,9 +61,7 @@ export function ZoomableImage({ src, alt }) {
           disabled: false,
         }}
         doubleClick={{
-          disabled: false,
-          step: 1.5,
-          animation: { animationTime: 200 },
+          disabled: true, // We handle double-click ourselves for toggle behavior
         }}
         panning={{
           disabled: false,
@@ -65,6 +84,7 @@ export function ZoomableImage({ src, alt }) {
             className="zoom-image"
             draggable={false}
             loading="lazy"
+            onDoubleClick={handleDoubleClick}
           />
         </TransformComponent>
       </TransformWrapper>
