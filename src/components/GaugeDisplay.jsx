@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import gaugesData from '../data/gauges.json';
 import { useFullScreen } from '../context/FullScreenContext';
-import { useRecentParts } from '../hooks/useRecentParts';
 import NotFound from './NotFound';
 import Loading from './Loading';
 import { ZoomableImage } from './ZoomableImage';
@@ -22,18 +21,10 @@ export function GaugeDisplay({ partCode, onNotFound }) {
   const [loading, setLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
   const { isFullScreen } = useFullScreen();
-  const { addRecentPart } = useRecentParts();
 
   useEffect(() => {
     setLoading(false);
   }, [partCode]);
-
-  // Track this part as recently viewed
-  useEffect(() => {
-    if (partCode && gaugesData[partCode]) {
-      addRecentPart(partCode);
-    }
-  }, [partCode, addRecentPart]);
 
   if (loading) return <Loading />;
 
