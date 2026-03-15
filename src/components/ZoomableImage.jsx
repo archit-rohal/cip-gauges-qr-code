@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import './ZoomableImage.css';
 
@@ -19,20 +19,15 @@ import './ZoomableImage.css';
  */
 export function ZoomableImage({ src, alt }) {
   const [isZoomedIn, setIsZoomedIn] = useState(false);
-  const transformRef = useRef(null);
 
-  const handleDoubleClick = () => {
-    const transform = transformRef.current;
-    if (!transform) return;
-
+  const handleDoubleClick = (utils) => {
     if (isZoomedIn) {
       // Reset to default view (1x zoom, centered)
-      transform.resetTransform();
+      utils.resetTransform();
       setIsZoomedIn(false);
     } else {
       // Zoom to 2.5x (good for inspecting gauge details)
-      // Parameters: positionX, positionY, scale, animationDuration
-      transform.setTransform(0, 0, 2.5, 200);
+      utils.setTransform(0, 0, 2.5, 200);
       setIsZoomedIn(true);
     }
   };
@@ -48,7 +43,6 @@ export function ZoomableImage({ src, alt }) {
 
       {/* Zoom wrapper with smooth animations */}
       <TransformWrapper
-        ref={transformRef}
         initialScale={1}
         minScale={1}
         maxScale={4}
@@ -74,19 +68,21 @@ export function ZoomableImage({ src, alt }) {
           animationType: 'easeOut',
         }}
       >
-        <TransformComponent
-          wrapperClass="zoom-wrapper"
-          contentClass="zoom-content"
-        >
-          <img
-            src={src}
-            alt={alt}
-            className="zoom-image"
-            draggable={false}
-            loading="lazy"
-            onDoubleClick={handleDoubleClick}
-          />
-        </TransformComponent>
+        {(utils) => (
+          <TransformComponent
+            wrapperClass="zoom-wrapper"
+            contentClass="zoom-content"
+          >
+            <img
+              src={src}
+              alt={alt}
+              className="zoom-image"
+              draggable={false}
+              loading="lazy"
+              onDoubleClick={() => handleDoubleClick(utils)}
+            />
+          </TransformComponent>
+        )}
       </TransformWrapper>
     </div>
   );
