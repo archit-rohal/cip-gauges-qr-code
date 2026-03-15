@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import './ZoomableImage.css';
 
@@ -9,7 +8,7 @@ import './ZoomableImage.css';
  * - Pinch-to-zoom on mobile
  * - Mouse wheel zoom on desktop
  * - Drag to pan when zoomed in
- * - Double-click to toggle zoom in/out (toggle behavior)
+ * - Double-click to zoom in/out
  * 
  * Uses react-zoom-pan-pinch library for smooth, reliable interactions
  * 
@@ -18,20 +17,6 @@ import './ZoomableImage.css';
  *   - alt: Alt text for accessibility
  */
 export function ZoomableImage({ src, alt }) {
-  const [isZoomedIn, setIsZoomedIn] = useState(false);
-
-  const handleDoubleClick = (utils) => {
-    if (isZoomedIn) {
-      // Reset to default view (1x zoom, centered)
-      utils.resetTransform();
-      setIsZoomedIn(false);
-    } else {
-      // Zoom to 2.5x (good for inspecting gauge details)
-      utils.setTransform(0, 0, 2.5, 200);
-      setIsZoomedIn(true);
-    }
-  };
-
   return (
     <div className="zoomable-image-container">
       {/* Zoom hint for first-time users */}
@@ -55,7 +40,9 @@ export function ZoomableImage({ src, alt }) {
           disabled: false,
         }}
         doubleClick={{
-          disabled: true, // We handle double-click ourselves for toggle behavior
+          disabled: false,
+          step: 1.5,
+          animation: { animationTime: 200 },
         }}
         panning={{
           disabled: false,
@@ -68,21 +55,18 @@ export function ZoomableImage({ src, alt }) {
           animationType: 'easeOut',
         }}
       >
-        {(utils) => (
-          <TransformComponent
-            wrapperClass="zoom-wrapper"
-            contentClass="zoom-content"
-          >
-            <img
-              src={src}
-              alt={alt}
-              className="zoom-image"
-              draggable={false}
-              loading="lazy"
-              onDoubleClick={() => handleDoubleClick(utils)}
-            />
-          </TransformComponent>
-        )}
+        <TransformComponent
+          wrapperClass="zoom-wrapper"
+          contentClass="zoom-content"
+        >
+          <img
+            src={src}
+            alt={alt}
+            className="zoom-image"
+            draggable={false}
+            loading="lazy"
+          />
+        </TransformComponent>
       </TransformWrapper>
     </div>
   );
