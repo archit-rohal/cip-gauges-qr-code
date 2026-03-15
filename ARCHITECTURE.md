@@ -97,7 +97,7 @@ However, hash-based routing is recommended for its simplicity and guaranteed com
 ```jsx
 // Example usage
 <ZoomableImage 
-  src="/gauges/EA2.png" 
+  src="/gauges/EA2.webp" 
   alt="Gauge list for EA2"
   maxZoom={4}
 />

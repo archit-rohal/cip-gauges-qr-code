@@ -114,7 +114,7 @@ Part page:   https://yourdomain.netlify.app/#/part/EA2
 
 **3. Gauge Display**
 - App looks up `EA2` in `gauges.json`
-- Loads gauge image from `public/gauges/EA2.png`
+- Loads gauge image from `public/gauges/EA2.webp`
 - Displays meta information (description, warnings)
 - Presents interactive image viewer for inspection
 
@@ -126,11 +126,11 @@ Part page:   https://yourdomain.netlify.app/#/part/EA2
 
 ### Adding New Parts
 No code changes needed! Just:
-1. Save gauge image to `public/gauges/YourPartCode.png`
+1. Save gauge image to `public/gauges/YourPartCode.webp`
 2. Add entry to `src/data/gauges.json`:
    ```json
    "YourPartCode": {
-     "image": "/gauges/YourPartCode.png",
+     "image": "/gauges/YourPartCode.webp",
      "description": "Gauge list for Your Part - Description",
      "note": "Any important handling instructions"
    }
@@ -240,7 +240,7 @@ The app uses `react-zoom-pan-pinch` library for smooth, reliable image interacti
 
 **Step 1: Save gauge image**
 ```
-public/gauges/NC1.png
+public/gauges/NC1.webp
 ```
 
 **Step 2: Update data file** (`src/data/gauges.json`)

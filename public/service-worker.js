@@ -64,6 +64,7 @@ self.addEventListener('fetch', (event) => {
     url.pathname.endsWith('.css') ||
     url.pathname.endsWith('.png') ||
     url.pathname.endsWith('.jpg') ||
+    url.pathname.endsWith('.webp') ||
     url.pathname.endsWith('.svg')
   ) {
     event.respondWith(
