@@ -96,14 +96,14 @@ Configuration files:
 The app uses **hash-based routing** for reliable SPA navigation on Netlify:
 
 ```
-Main app:    https://yourdomain.netlify.app/#/
-Part page:   https://yourdomain.netlify.app/#/part/EA2
+Main app:    https://cip-gauges.netlify.app/#/
+Part page:   https://cip-gauges.netlify.app/#/part/EA2
 ```
 
 ### QR Code Workflow
 
 **1. QR Code Setup**
-- QR code embeds: `https://yourdomain.netlify.app/#/part/EA2`
+- QR code embeds: `https://cip-gauges.netlify.app/#/part/EA2`
 - Sticker placed on gauge cabinet door
 - Workers scan with phone camera
 
