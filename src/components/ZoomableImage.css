@@ -1,4 +1,4 @@
-/* ZoomableImage Component Styles */
+/* ZoomableImage Component Styles - Refined Image Viewer */
 
 .zoomable-image-container {
   @apply relative w-full h-full flex flex-col justify-center items-center gap-4 bg-white;
@@ -7,9 +7,12 @@
   -webkit-touch-callout: none;
 }
 
-/* Zoom wrapper - handles all transforms */
+/* ====== ZOOM WRAPPER - Main Image Container ====== */
 .zoom-wrapper {
-  @apply w-full h-full flex justify-center items-center overflow-hidden bg-gray-50 rounded-lg;
+  @apply w-full h-full flex justify-center items-center overflow-hidden;
+  @apply bg-gradient-to-br from-gray-50 to-white;
+  @apply border border-gray-200 rounded-lg;
+  @apply shadow-sm hover:shadow-md transition-shadow duration-300;
   position: relative;
   min-height: 20rem;
   touch-action: manipulation;
@@ -22,7 +25,7 @@
   height: 100%;
 }
 
-/* Image */
+/* ====== IMAGE ====== */
 .zoom-image {
   @apply max-w-full max-h-full object-contain;
   pointer-events: none;
@@ -31,11 +34,19 @@
   -webkit-user-select: none;
 }
 
-/* Zoom hint for mobile users */
+/* ====== ZOOM HINT ====== */
 .zoom-hint {
-  @apply text-center px-4 py-2 text-gray-500 text-xs;
+  @apply text-center px-3 md:px-4 py-2 md:py-3;
+  @apply text-gray-600 text-xs md:text-sm font-medium;
+  @apply bg-gray-50 rounded-md border border-gray-200;
+  transition: all 0.3s ease;
 }
 
+.zoom-hint:hover {
+  @apply bg-gray-100 border-gray-300;
+}
+
+/* ====== RESPONSIVE SIZING ====== */
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .zoomable-image-container {
@@ -43,25 +54,38 @@
   }
 
   .zoom-wrapper {
-    min-height: 15rem;
+    min-height: 16rem;
+    border-radius: 0.5rem;
   }
 
   .zoom-hint {
-    @apply text-xs;
+    @apply text-xs px-3 py-2;
   }
 }
 
-/* Tablet/Desktop */
-@media (min-width: 768px) {
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
   .zoomable-image-container {
-    @apply gap-4;
+    @apply gap-3 px-3;
   }
 
   .zoom-wrapper {
-    min-height: 24rem;
+    min-height: 22rem;
   }
 }
 
+/* Desktop */
+@media (min-width: 1025px) {
+  .zoomable-image-container {
+    @apply gap-4 px-4;
+  }
+
+  .zoom-wrapper {
+    min-height: 28rem;
+  }
+}
+
+/* ====== INTERACTION STATES ====== */
 /* Prevent text selection during zoom interaction */
 .zoomable-image-container img {
   user-select: none;
@@ -70,12 +94,18 @@
   -ms-user-select: none;
 }
 
-/* Hand cursor when hoverable */
+/* Grab cursor and interaction feedback */
 .zoom-wrapper {
   cursor: grab;
 }
 
 .zoom-wrapper:active {
   cursor: grabbing;
+  @apply shadow-lg;
+}
+
+/* Visual feedback when interacting */
+.zoom-wrapper.zooming {
+  @apply shadow-md;
 }
 

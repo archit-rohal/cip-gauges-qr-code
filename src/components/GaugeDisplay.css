@@ -1,0 +1,136 @@
+/* GaugeDisplay Component Styles - Layout & Polish */
+
+.gauge-display-wrapper {
+  @apply w-full h-full flex flex-col bg-white;
+  overflow: hidden;
+}
+
+/* ====== HEADER BANNER ====== */
+.gauge-display-header {
+  @apply bg-white border-b border-gray-100;
+  @apply px-4 md:px-6 py-4 md:py-6;
+  flex-shrink: 0;
+}
+
+.gauge-display-header h1 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 m-0;
+  letter-spacing: -0.02em;
+}
+
+.gauge-display-header .part-code {
+  @apply text-blue-600 font-bold;
+}
+
+/* ====== CONTENT AREA ====== */
+.gauge-display-content {
+  @apply flex-1 w-full overflow-auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image viewer container */
+.gauge-display-image-section {
+  @apply flex-1 flex items-center justify-center;
+  @apply px-4 md:px-6 py-6 md:py-8;
+  min-height: 20rem;
+}
+
+.gauge-display-image-wrapper {
+  @apply w-full max-w-4xl;
+}
+
+/* Error state */
+.gauge-display-error {
+  @apply flex flex-col items-center justify-center w-full py-12 md:py-16;
+  text-align: center;
+}
+
+.gauge-display-error-icon {
+  @apply text-5xl md:text-6xl mb-4 text-amber-500;
+}
+
+.gauge-display-error-title {
+  @apply text-2xl md:text-3xl text-gray-900 font-bold mb-3;
+}
+
+.gauge-display-error-msg {
+  @apply text-lg md:text-xl text-gray-600;
+}
+
+/* ====== METADATA SECTION ====== */
+.gauge-display-metadata {
+  @apply flex-shrink-0;
+  @apply px-4 md:px-6 pb-6 md:pb-8;
+  @apply bg-gradient-to-b from-white to-gray-50;
+  border-top: 1px solid #f3f4f6;
+}
+
+.gauge-display-description {
+  @apply max-w-3xl mx-auto mb-6 md:mb-8;
+}
+
+.gauge-display-description p {
+  @apply text-base md:text-lg text-gray-700 leading-relaxed m-0;
+}
+
+/* ====== NOTE / IMPORTANT SECTION ====== */
+.gauge-display-note {
+  @apply max-w-3xl mx-auto;
+  @apply px-4 md:px-6 py-4 md:py-6 rounded-lg;
+  @apply bg-amber-50 border-l-4 border-amber-500;
+}
+
+.gauge-display-note-title {
+  @apply text-sm md:text-base font-bold text-amber-900 mb-2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gauge-display-note-content {
+  @apply text-base md:text-lg text-amber-800 leading-relaxed m-0;
+}
+
+/* ====== MOBILE OPTIMIZATIONS ====== */
+@media (max-width: 640px) {
+  .gauge-display-header {
+    @apply px-3 py-3;
+  }
+
+  .gauge-display-header h1 {
+    @apply text-2xl;
+  }
+
+  .gauge-display-image-section {
+    @apply px-2 py-4;
+    min-height: 15rem;
+  }
+
+  .gauge-display-metadata {
+    @apply px-3 pb-4;
+  }
+
+  .gauge-display-description {
+    @apply mb-4;
+  }
+
+  .gauge-display-note {
+    @apply px-3 py-3;
+  }
+}
+
+/* Fullscreen mode - hide metadata */
+.gauge-page.fullscreen-mode .gauge-display-metadata {
+  @apply hidden;
+}
+
+/* ====== RESPONSIVE BREAKPOINTS ====== */
+@media (min-width: 1024px) {
+  .gauge-display-image-section {
+    @apply py-8;
+  }
+
+  .gauge-display-metadata {
+    @apply pb-10 px-8;
+  }
+}

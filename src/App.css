@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 /**
- * Global styles for Gauge Identification System
+ * Global Styles for Gauge Identification System
  * 
- * Design principles:
- * - Mobile-first responsive design
- * - High contrast for bright industrial environments
- * - Large text for readability at distance
- * - Minimal animations for fast performance
- * - Touch-friendly interface
+ * Design Philosophy:
+ * - Clean industrial utility with modern refinement
+ * - Clear typographic hierarchy for readability
+ * - Purposeful use of whitespace and color
+ * - Polished interactions and visual feedback
+ * - Manufacturing-focused, practical aesthetics
  */
 
 * {
@@ -30,7 +30,7 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
-  color: #1f2937;
+  color: #374151;
 }
 
 /* Ensure full height for mobile */
@@ -45,6 +45,35 @@ body {
   flex-direction: column;
 }
 
+/* ====== TYPOGRAPHY ====== */
+/* Improved heading and text hierarchy */
+h1 {
+  @apply text-4xl md:text-5xl font-bold text-gray-900;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  @apply text-2xl md:text-3xl font-semibold text-gray-900;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  @apply text-xl md:text-2xl font-semibold text-gray-800;
+  line-height: 1.4;
+}
+
+body {
+  @apply text-base leading-relaxed;
+  color: #374151;
+}
+
+small, .text-sm {
+  @apply text-sm leading-snug;
+  color: #6b7280;
+}
+
 /* Images: Optimize for industrial environment */
 img {
   max-width: 100%;
@@ -54,24 +83,80 @@ img {
 
 /* Links: High contrast and touch-friendly */
 a {
-  color: #1e40af;
+  @apply text-blue-600 transition-colors duration-200;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #1e3a8a;
-  text-decoration: underline;
+  @apply text-blue-700 underline;
 }
 
-/* Responsive typography: Scale text based on viewport */
-@media (max-width: 640px) {
-  html {
-    font-size: 14px;
-  }
+/* ====== BUTTONS & CONTROLS ====== */
+/* Refined button defaults */
+button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Animations: Simple and performant */
+/* Ensure touch targets are at least 48px (improved from 44px) */
+button,
+a[role='button'] {
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Primary button style */
+.btn-primary {
+  @apply px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg;
+  @apply hover:bg-blue-700 active:bg-blue-800;
+  @apply shadow-sm hover:shadow-md;
+  @apply enabled:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Secondary button style */
+.btn-secondary {
+  @apply px-6 py-3 text-lg font-semibold text-blue-600 bg-blue-50 rounded-lg;
+  @apply border-2 border-blue-200;
+  @apply hover:bg-blue-100 hover:border-blue-300 active:bg-blue-200;
+  @apply transition-colors duration-200;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ====== INPUTS ====== */
+input, textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+  @apply px-4 py-3 text-base;
+  @apply border-2 border-gray-300;
+  @apply bg-white focus:outline-none;
+  @apply focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+}
+
+input:autofill {
+  -webkit-autofill-delay: 0s;
+}
+
+/* ====== ANIMATIONS ====== */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -85,14 +170,7 @@ a:hover {
   animation: spin 1s linear infinite;
 }
 
-/* Ensure touch targets are at least 44px */
-button,
-a[role='button'] {
-  min-height: 44px;
-  min-width: 44px;
-}
-
-/* Readability: High contrast backgrounds */
+/* ====== UTILITY COLOR CLASSES ====== */
 .bg-yellow-50 {
   background-color: #fffbeb;
 }

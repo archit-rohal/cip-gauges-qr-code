@@ -1,70 +1,132 @@
-/* GaugePage Styles */
+/* GaugePage Styles - Refined Controls & Layout */
 
 .gauge-page {
-  @apply relative w-full h-full;
-  position: relative;
+  @apply relative w-full h-full bg-white;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ====== LAYOUT HEADER ====== */
+.gauge-page-header {
+  @apply px-4 md:px-6 py-4 md:py-5;
+  @apply border-b border-gray-100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gauge-page-header h1 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900;
+  letter-spacing: -0.02em;
+}
+
+.gauge-page-header .accent {
+  @apply text-blue-600;
+}
+
+/* ====== BACK BUTTON ====== */
 .back-button {
-  @apply fixed top-4 left-4 md:top-6 md:left-6 px-4 py-2 text-lg font-semibold text-blue-600 bg-white rounded-lg border-2 border-blue-200 hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 z-50 shadow-sm;
+  @apply fixed top-4 left-4 md:top-6 md:left-6;
+  @apply px-3 md:px-4 py-2 md:py-3;
+  @apply text-base md:text-lg font-semibold leading-none;
+  @apply text-blue-600 bg-white;
+  @apply border-2 border-blue-200 rounded-lg;
+  @apply hover:bg-blue-50 hover:border-blue-300 hover:shadow-md;
+  @apply active:bg-blue-100 active:border-blue-400;
+  @apply transition-all duration-200 ease-out;
+  @apply z-50 shadow-sm;
   -webkit-appearance: none;
   -webkit-touch-callout: none;
   touch-action: manipulation;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  min-height: 3rem;
 }
 
 .back-button:active {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
+.back-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* ====== FULLSCREEN BUTTON ====== */
 .fullscreen-button {
-  @apply fixed top-4 right-4 md:top-6 md:right-6 px-3 py-2 text-xl font-semibold text-blue-600 bg-white rounded-lg border-2 border-blue-200 hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 z-50 shadow-sm;
+  @apply fixed top-4 right-4 md:top-6 md:right-6;
+  @apply px-3 md:px-4 py-2 md:py-3;
+  @apply text-lg md:text-xl font-semibold leading-none;
+  @apply text-blue-600 bg-white;
+  @apply border-2 border-blue-200 rounded-lg;
+  @apply hover:bg-blue-50 hover:border-blue-300 hover:shadow-md;
+  @apply active:bg-blue-100 active:border-blue-400;
+  @apply transition-all duration-200 ease-out;
+  @apply z-50 shadow-sm;
   -webkit-appearance: none;
   -webkit-touch-callout: none;
   touch-action: manipulation;
   cursor: pointer;
-  min-width: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  min-height: 3rem;
 }
 
 .fullscreen-button:active {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
+.fullscreen-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Full-screen state styling */
 .fullscreen-button--active {
-  @apply bg-blue-100 border-blue-300;
+  @apply bg-blue-100 border-blue-400 text-blue-700;
 }
 
-/* Mobile adjustments */
+/* Mobile: More generous touch targets */
 @media (max-width: 640px) {
   .back-button {
-    @apply fixed top-3 left-3 px-3 py-1.5 text-base;
-    z-index: 50;
+    @apply top-3 left-3 px-2.5 py-2;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 0.95rem;
   }
 
   .fullscreen-button {
-    @apply fixed top-3 right-3 px-2 py-1.5 text-lg;
-    z-index: 50;
+    @apply top-3 right-3 px-2. py-2;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 1rem;
   }
 
   .gauge-page {
-    padding-top: 3rem;
+    padding-top: 0;
   }
 }
 
-/* Tablet and up */
+/* Tablet and up - Add subtle shadow on hover */
 @media (min-width: 768px) {
-  .back-button {
-    @apply hover:shadow-md;
-  }
-
-  .fullscreen-button {
-    @apply hover:shadow-md;
+  .back-button:hover,
+  .fullscreen-button:hover {
+    transform: translateY(-1px);
   }
 }
 
-/* Full-screen mode: hide navigation UI */
+/* ====== FULL-SCREEN MODE ====== */
+/* Hide navigation UI in full-screen */
 .gauge-page.fullscreen-mode .back-button,
 .gauge-page.fullscreen-mode .zoom-hint {
   @apply hidden;
+}
+
+/* Full-screen keeps only fullscreen button visible */
+.gauge-page.fullscreen-mode .fullscreen-button {
+  @apply shadow-md;
 }
 
