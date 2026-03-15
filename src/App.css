@@ -3,20 +3,45 @@
 @tailwind utilities;
 
 /**
- * Global Styles for Gauge Identification System
+ * Global Design System - Premium Industrial Reference App
  * 
- * Design Philosophy:
- * - Clean industrial utility with modern refinement
- * - Clear typographic hierarchy for readability
- * - Purposeful use of whitespace and color
- * - Polished interactions and visual feedback
- * - Manufacturing-focused, practical aesthetics
+ * Inspired by Apple's design language, adapted for industrial utility:
+ * - Restrained elegance with intentional hierarchy
+ * - Premium surfaces and refined controls
+ * - Spacious, breathing layouts
+ * - Soft depth through layered shadows
+ * - Focus on content (gauge images) as primary
+ * - Excellent mobile-first experience
  */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* ====== COLOR SYSTEM ====== */
+:root {
+  /* Backgrounds */
+  --bg-primary: #F8F9FB;      /* Main app background - soft gray-wash */
+  --bg-secondary: #FFFFFF;    /* Content areas - pure white */
+  --bg-tertiary: #F5F5F7;     /* Subtle elevation/grouping */
+  
+  /* Text */
+  --text-primary: #1D1D1D;    /* Main text - premium darkness */
+  --text-secondary: #6B7280;  /* Secondary info - intelligent gray */
+  --text-tertiary: #A0A0A0;   /* Hints/metadata - light gray */
+  
+  /* Accents */
+  --accent-primary: #0066CC;  /* Primary action - professional blue */
+  --accent-light: #E3F2FF;    /* Accent background tint */
+  
+  /* Borders & Shadows */
+  --border-color: #D9D9E3;    /* Subtle refined lines */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.20);
 }
 
 html,
@@ -29,11 +54,10 @@ body,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #374151;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
-/* Ensure full height for mobile */
 body {
   width: 100vw;
   height: 100vh;
@@ -45,62 +69,85 @@ body {
   flex-direction: column;
 }
 
-/* ====== TYPOGRAPHY ====== */
-/* Improved heading and text hierarchy */
+/* ====== TYPOGRAPHY SYSTEM ====== */
 h1 {
-  @apply text-4xl md:text-5xl font-bold text-gray-900;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
 }
 
 h2 {
-  @apply text-2xl md:text-3xl font-semibold text-gray-900;
-  line-height: 1.3;
+  font-size: 1.75rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--text-primary);
 }
 
 h3 {
-  @apply text-xl md:text-2xl font-semibold text-gray-800;
+  font-size: 1.25rem;
+  font-weight: 600;
   line-height: 1.4;
+  color: var(--text-primary);
 }
 
 body {
-  @apply text-base leading-relaxed;
-  color: #374151;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-small, .text-sm {
-  @apply text-sm leading-snug;
-  color: #6b7280;
+small,
+.text-caption {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-tertiary);
 }
 
-/* Images: Optimize for industrial environment */
+.text-metadata {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Links: High contrast and touch-friendly */
+/* Links */
 a {
-  @apply text-blue-600 transition-colors duration-200;
+  color: var(--accent-primary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  @apply text-blue-700 underline;
+  color: #0052A3;
 }
 
-/* ====== BUTTONS & CONTROLS ====== */
-/* Refined button defaults */
+/* ====== BUTTON SYSTEM ====== */
 button {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
 }
 
-/* Ensure touch targets are at least 48px (improved from 44px) */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 button,
 a[role='button'] {
   min-height: 48px;
@@ -110,46 +157,104 @@ a[role='button'] {
   justify-content: center;
 }
 
-/* Primary button style */
+/* Primary button */
 .btn-primary {
-  @apply px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg;
-  @apply hover:bg-blue-700 active:bg-blue-800;
-  @apply shadow-sm hover:shadow-md;
-  @apply enabled:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  background-color: var(--accent-primary);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-primary:active {
+.btn-primary:hover:not(:disabled) {
+  background-color: #0052A3;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active:not(:disabled) {
+  background-color: #003D7A;
   transform: scale(0.98);
 }
 
-/* Secondary button style */
+/* Secondary button */
 .btn-secondary {
-  @apply px-6 py-3 text-lg font-semibold text-blue-600 bg-blue-50 rounded-lg;
-  @apply border-2 border-blue-200;
-  @apply hover:bg-blue-100 hover:border-blue-300 active:bg-blue-200;
-  @apply transition-colors duration-200;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-secondary:active {
+.btn-secondary:hover:not(:disabled) {
+  background-color: #EBEBF0;
+  border-color: #D0D0DA;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:active:not(:disabled) {
+  background-color: #DCDCE1;
   transform: scale(0.98);
+}
+
+/* Icon button */
+.btn-icon {
+  background-color: transparent;
+  color: var(--text-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.btn-icon:hover:not(:disabled) {
+  background-color: var(--bg-tertiary);
+}
+
+.btn-icon:active:not(:disabled) {
+  background-color: #EBEBF0;
 }
 
 /* ====== INPUTS ====== */
-input, textarea {
+input,
+textarea {
   -webkit-appearance: none;
   appearance: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+textarea {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"],
-textarea {
-  @apply px-4 py-3 text-base;
-  @apply border-2 border-gray-300;
-  @apply bg-white focus:outline-none;
-  @apply focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+input::placeholder {
+  color: var(--text-tertiary);
 }
 
 input:autofill {
@@ -170,11 +275,52 @@ input:autofill {
   animation: spin 1s linear infinite;
 }
 
-/* ====== UTILITY COLOR CLASSES ====== */
+/* ====== ERROR/FALLBACK STATES ====== */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  text-align: center;
+}
+
+.not-found-icon {
+  font-size: 4rem;
+  color: var(--text-tertiary);
+  margin-bottom: 1.5rem;
+}
+
+.not-found-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.not-found-message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+.not-found-hint {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  max-width: 400px;
+}
+
+/* ====== UTILITY ====== */
 .bg-yellow-50 {
-  background-color: #fffbeb;
+  background-color: #FFFBEB;
 }
 
 .bg-red-50 {
-  background-color: #fef2f2;
+  background-color: #FEE2E2;
 }
