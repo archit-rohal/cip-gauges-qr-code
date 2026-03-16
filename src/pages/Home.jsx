@@ -136,7 +136,7 @@ export function Home() {
       <div className="home-footer">
         <p className="footer-text">{availableParts.length} parts available</p>
         <p className="footer-credit">
-          Created by <span className="creator-name">Archit</span>
+          Created by <span className="creator-name">Archit Rohal</span>
         </p>
       </div>
     </div>
