@@ -236,6 +236,23 @@
   letter-spacing: 0.02em;
 }
 
+.footer-credit {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-top: 0.75rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.creator-name {
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-style: normal;
+  opacity: 1;
+}
+
 /* ====== MOBILE OPTIMIZATIONS ====== */
 @media (max-width: 640px) {
   .home-hero {
