@@ -212,6 +212,27 @@ export function Home() {
       {/* Footer Info */}
       <div className="home-footer">
         <p className="footer-text">{availableParts.length} parts available</p>
+        
+        {/* Sync Indicator */}
+        <div className="sync-indicator">
+          <span>Data synced: {new Date().toLocaleDateString()}</span>
+          <button 
+            className="sync-btn"
+            onClick={() => {
+              // Clear cache and reload for latest data
+              if ('caches' in window) {
+                caches.keys().then((names) => {
+                  names.forEach(name => caches.delete(name));
+                });
+              }
+              window.location.reload();
+            }}
+            aria-label="Refresh app data to latest"
+          >
+            ↻ Refresh
+          </button>
+        </div>
+
         <p className="footer-credit">
           Created by <span className="creator-name">Archit Rohal</span>
         </p>

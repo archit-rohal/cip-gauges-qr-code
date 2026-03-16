@@ -1,4 +1,5 @@
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { useFullScreen } from '../context/FullScreenContext';
 import './ZoomableImage.css';
 
 /**
@@ -16,13 +17,15 @@ import './ZoomableImage.css';
  *   - src: Image source URL
  *   - alt: Alt text for accessibility
  */
-export function ZoomableImage({ src, alt }) {
+export function ZoomableImage({ src, alt, onError }) {
+  const { isFullScreen, toggleFullScreen } = useFullScreen();
+
   return (
     <div className="zoomable-image-container">
       {/* Zoom hint for first-time users */}
       <div className="zoom-hint">
         <p className="text-xs text-gray-500">
-          💡 Pinch to zoom • Drag to pan • Double-click to zoom in/out
+          💡 Tap image to expand • Pinch to zoom • Drag to pan
         </p>
       </div>
 
@@ -65,6 +68,10 @@ export function ZoomableImage({ src, alt }) {
             className="zoom-image"
             draggable={false}
             loading="lazy"
+            onError={onError}
+            onClick={() => {
+              if (!isFullScreen) toggleFullScreen();
+            }}
           />
         </TransformComponent>
       </TransformWrapper>

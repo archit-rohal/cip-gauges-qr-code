@@ -39,6 +39,7 @@ export default defineConfig({
       workbox: {
         // Cache all essential files for offline mode
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,webp,jpg}'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB to include all gauge images
         runtimeCaching: [
           {
             urlPattern: /.*/i,
