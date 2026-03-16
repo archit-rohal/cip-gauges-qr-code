@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import gaugesData from '../data/gauges.json';
+import { useGaugesData } from '../hooks/useGaugesData';
 import { useFullScreen } from '../context/FullScreenContext';
 import NotFound from './NotFound';
 import Loading from './Loading';
@@ -18,18 +18,20 @@ import './GaugeDisplay.css';
  *   - onNotFound: Optional callback when part is not found
  */
 export function GaugeDisplay({ partCode, onNotFound }) {
-  const [loading, setLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
   const { isFullScreen } = useFullScreen();
 
+  const { data: gaugesData, loading, error } = useGaugesData();
+
   useEffect(() => {
-    setLoading(false);
+    setImageError(false);
   }, [partCode]);
 
   if (loading) return <Loading />;
+  if (error) return <div className="gauge-display-wrapper"><div className="gauge-display-error">Failed to load part data</div></div>;
 
   // Part not found or not provided
-  if (!partCode || !gaugesData[partCode]) {
+  if (!partCode || !gaugesData || !gaugesData[partCode]) {
     if (onNotFound) onNotFound();
     return <NotFound partCode={partCode} />;
   }

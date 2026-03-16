@@ -55,11 +55,10 @@ However, hash-based routing is recommended for its simplicity and guaranteed com
 
 ### 3. **Image Zoom Feature**
 
-#### Implementation: **Custom React Hook + Component** (Zero External Dependencies)
+#### Implementation: **React Hooks + `react-zoom-pan-pinch`**
 
-**Why Custom Over a Library?**
-- ✅ **Zero extra dependencies** — no external zoom libraries needed
-- ✅ **Small bundle size** — ~200 lines of code
+**Why this approach?**
+- ✅ **Stability** — react-zoom-pan-pinch is a reliable library for smooth pan/zoom
 - ✅ **Smooth performance** — native CSS transforms, no jank
 - ✅ **Mobile-friendly** — pinch-to-zoom gesture support
 - ✅ **Accessible** — keyboard buttons plus touch gestures
@@ -75,13 +74,8 @@ However, hash-based routing is recommended for its simplicity and guaranteed com
 | **Reset button** | One-click return to normal | All |
 
 **Architectural Components:**
-1. **`useImageZoom` hook** (`src/hooks/useImageZoom.js`)
-   - Manages zoom level (1x to 4x)
-   - Handles pan position for dragging
-   - Detects touch events (pinch) and wheel events (scroll)
-   - Provides control methods: `zoomIn()`, `zoomOut()`, `resetZoom()`
-
-2. **`<ZoomableImage>` component** (`src/components/ZoomableImage.jsx`)
+1. **`<ZoomableImage>` component** (`src/components/ZoomableImage.jsx`)
+   - Uses `react-zoom-pan-pinch` for core zoom and pan handling
    - Reusable UI component for any image in the app
    - Displays zoom controls (+, −, %, reset)
    - Shows helpful hint on first load
@@ -133,8 +127,6 @@ src/
 │   ├── ZoomableImage.css     [NEW] Zoom controls styling
 │   ├── NotFound.jsx          (unchanged)
 │   └── Loading.jsx           (unchanged)
-├── hooks/
-│   └── useImageZoom.js       [NEW] Custom zoom hook
 ├── data/
 │   └── gauges.json           (unchanged)
 ├── assets/
@@ -162,7 +154,8 @@ Root files:
 
 ### Added:
 ```json
-"react-router-dom": "^6.26.0"  (~15 KB gzipped)
+"react-router-dom": "^6.26.0"
+"react-zoom-pan-pinch": "^3.4.4"
 ```
 
 **Impact:** Minimal bundle size increase, justified by:

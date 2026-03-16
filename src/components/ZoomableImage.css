@@ -10,9 +10,10 @@
 /* ====== ZOOM WRAPPER - Main Image Container ====== */
 .zoom-wrapper {
   @apply w-full h-full flex justify-center items-center overflow-hidden;
-  @apply bg-gradient-to-br from-gray-50 to-white;
-  @apply border border-gray-200 rounded-lg;
-  @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+  @apply bg-gradient-to-br from-gray-50 to-white transition-shadow duration-300;
+  border: 4px solid var(--border-color, #cbd5e1);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   position: relative;
   min-height: 20rem;
   touch-action: manipulation;

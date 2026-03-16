@@ -114,16 +114,13 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  /* Removed max-height here so content fully displays */
 }
 
 @media (max-width: 640px) {
   .gauge-metadata-section {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 1rem 3rem 1rem;
     gap: 1rem;
-    max-height: 50vh;
   }
 }
 

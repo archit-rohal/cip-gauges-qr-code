@@ -1,5 +1,6 @@
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FullScreenProvider } from './context/FullScreenContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Home } from './pages/Home';
 import { GaugePage } from './pages/GaugePage';
 import './App.css';
@@ -18,13 +19,15 @@ import './App.css';
 function App() {
   return (
     <FullScreenProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/part/:partCode" element={<GaugePage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
+      <ErrorBoundary>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/part/:partCode" element={<GaugePage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </ErrorBoundary>
     </FullScreenProvider>
   );
 }
